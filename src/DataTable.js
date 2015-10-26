@@ -19,16 +19,10 @@ var DataTable = React.createClass({
           <div className="col-xs-4">
             <SelectField
               id="page-menu"
-              label="Page size:"
+              label={this.props.pageSizeLabel ? this.props.pageSizeLabel : 'Page size:'}
               value={this.state.pageLength}
               options={this.props.pageLengthOptions}
               onChange={this.onPageLengthChange}
-            />
-            <SearchField
-              id="search-field"
-              label="Search:"
-              value={this.state.filterValues.globalSearch}
-              onChange={this.onFilter.bind(this, 'globalSearch')}
             />
           </div>
           <div className="col-xs-8">
