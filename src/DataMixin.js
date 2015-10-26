@@ -13,7 +13,7 @@ function buildInitialState(props) {
     sortBy: props.initialSortBy,
     filterValues: {},
     currentPage: 0,
-    pageLength: props.initialPageLength,
+    pageLength: props.initialPageLength
   };
 }
 
@@ -93,6 +93,10 @@ module.exports = {
     this.setState({
       pageLength: newPageLength,
       currentPage: newPage,
+    }, ()=>{
+       if(this.props.onPageLengthChange){
+        this.props.onPageLengthChange(newPageLength);
+       }
     });
   },
 
