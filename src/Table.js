@@ -42,6 +42,7 @@ export default class Table {
   static defaultProps = {
     buildRowOptions: () => ({}),
     sortBy: {},
+    noDataLabel: 'No data'
   };
 
   static propTypes = {
@@ -86,6 +87,7 @@ export default class Table {
     }),
 
     onSort: PropTypes.func,
+    noDataLabel: PropTypes.string
   };
 
   constructor() {
@@ -158,7 +160,7 @@ export default class Table {
         <tbody>
           {rows.length ? rows :
             <tr>
-              <td colSpan={columns.length} className="text-center">No data</td>
+              <td colSpan={columns.length} className="text-center">{this.props.noDataLabel}</td>
             </tr>}
         </tbody>
       </table>

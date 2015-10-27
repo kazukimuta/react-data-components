@@ -40,6 +40,7 @@ var DataTable = React.createClass({
           columns={this.props.columns}
           keys={this.props.keys}
           buildRowOptions={this.props.buildRowOptions}
+          noDataLabel={this.props.noDataLabel}
           sortBy={this.state.sortBy}
           onSort={this.onSort}
         />
