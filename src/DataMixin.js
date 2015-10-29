@@ -12,7 +12,7 @@ function buildInitialState(props) {
     data: props.initialData.slice(0),
     sortBy: props.initialSortBy,
     filterValues: {},
-    currentPage: 0,
+    currentPage: props.currentPage,
     pageLength: props.initialPageLength
   };
 }
@@ -82,7 +82,11 @@ module.exports = {
   },
 
   onChangePage(pageNumber) {
-    this.setState({ currentPage: pageNumber });
+    this.setState({ currentPage: pageNumber }, ()=>{
+      if(this.props.onChangePage){
+        this.props.onChangePage(pageNumber);
+       }
+    });
   },
 
   onPageLengthChange(value) {
