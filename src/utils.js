@@ -22,8 +22,13 @@ function some(pred, obj) {
  */
 var sortByFunc = 
   (prop) => 
-    (a, b) => isFinite(a[prop]) && isFinite(b[prop]) ? 
-      a[prop] - b[prop] :  a[prop] < b[prop] ? -1 : a[prop] > b[prop] ? 1 : 0;
+    (a, b) => {
+      if(typeof a[prop] === 'object' && typeof b[prop] === 'object' ){//React Element is rendered
+        return isFinite(a[prop].props.sortBy) && isFinite(b[prop].props.sortBy) ? a[prop].props.sortBy - b[prop].props.sortBy : a[prop].props.sortBy < b[prop].props.sortBy ? -1 : a[prop].props.sortBy > b[prop].props.sortBy ? 1 : 0;
+      }else{
+        return isFinite(a[prop]) && isFinite(b[prop]) ? a[prop] - b[prop] : a[prop] < b[prop] ? -1 : a[prop] > b[prop] ? 1 : 0;
+      }
+    }
 
 /**
  * @param {object} sortBy Object containing `prop` and `order`.
