@@ -52,6 +52,9 @@ module.exports = {
       sortBy: sortBy,
       data: sort(sortBy, this.state.data),
     });
+    if(this.props.onSort){
+      this.props.onSort(sort(sortBy, this.state.data));
+    }
   },
 
   onFilter(filterName, filterValue) {
