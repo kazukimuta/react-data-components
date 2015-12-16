@@ -42,7 +42,7 @@ export default class Table {
   static defaultProps = {
     buildRowOptions: () => ({}),
     sortBy: {},
-    noDataLabel: 'No data'
+    noDataLabel: 'No data',
   };
 
   static propTypes = {
@@ -87,7 +87,7 @@ export default class Table {
     }),
 
     onSort: PropTypes.func,
-    noDataLabel: PropTypes.string
+    noDataLabel: PropTypes.string,
   };
 
   constructor() {

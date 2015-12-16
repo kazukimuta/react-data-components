@@ -13,7 +13,8 @@ function buildInitialState(props) {
     sortBy: props.initialSortBy,
     filterValues: {},
     currentPage: props.currentPage,
-    pageLength: props.initialPageLength
+    pageLength: props.initialPageLength,
+    totalCountResult: props.totalCountResult,
   };
 }
 
@@ -53,7 +54,7 @@ module.exports = {
       data: sort(sortBy, this.state.data),
     });
     if(this.props.onSort){
-      this.props.onSort(sort(sortBy, this.state.data));
+      this.props.onSort(sortBy, sort(sortBy, this.state.data));
     }
   },
 
@@ -74,13 +75,14 @@ module.exports = {
 
   // Pagination
   buildPage() {
-    var {data, currentPage, pageLength} = this.state;
+    var {data, currentPage, pageLength, totalCountResult} = this.state;
     var start = pageLength * currentPage;
-
     return {
-      data: data.slice(start, start + pageLength),
+      //data: data.slice(start, start + pageLength),
+      data: data,
       currentPage: currentPage,
-      totalPages: Math.ceil(data.length / pageLength),
+      //totalPages: Math.ceil(data.length / pageLength),
+      totalPages: Math.ceil(totalCountResult / pageLength),
     };
   },
 
