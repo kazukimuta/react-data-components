@@ -12,7 +12,15 @@ var DataTable = React.createClass({
 
   render() {
     var page = this.buildPage();
-
+    var searchField = '';
+    if(this.props.isRequireSearch){
+      searchField = (
+              <SearchField
+               id="search-field"
+               label={this.props.searchLabel ? this.props.searchLabel : 'Search:'}
+               value={this.state.filterValues.globalSearch}
+               onChange={this.onFilter.bind(this, 'globalSearch')}/>);
+    }
     return (
       <div className={this.props.className}>
         <div className="row">
@@ -24,6 +32,7 @@ var DataTable = React.createClass({
               options={this.props.pageLengthOptions}
               onChange={this.onPageLengthChange}
             />
+            {searchField}
           </div>
           <div className="col-xs-8">
             <Pagination
