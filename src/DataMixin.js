@@ -15,6 +15,7 @@ function buildInitialState(props) {
     currentPage: props.currentPage,
     pageLength: props.initialPageLength,
     totalCountResult: props.totalCountResult,
+    isNeedLoadPerPage: props.isNeedLoadPerPage
   };
 }
 
@@ -28,6 +29,7 @@ module.exports = {
     return {
       initialPageLength: 10,
       pageLengthOptions: [ 5, 10, 20 ],
+      isNeedLoadPerPage: true,
       filters: {
         globalSearch: {
           filter: containsIgnoreCase,
@@ -75,14 +77,16 @@ module.exports = {
 
   // Pagination
   buildPage() {
-    var {data, currentPage, pageLength, totalCountResult} = this.state;
+    var {data, currentPage, pageLength, totalCountResult, isNeedLoadPerPage} = this.state;
     var start = pageLength * currentPage;
     return {
+      data: (isNeedLoadPerPage ? data : data.slice(start, start + pageLength)),
       //data: data.slice(start, start + pageLength),
-      data: data,
+      //data: data,
       currentPage: currentPage,
+      totalPages: (isNeedLoadPerPage ? Math.ceil(totalCountResult / pageLength) : Math.ceil(data.length / pageLength))
       //totalPages: Math.ceil(data.length / pageLength),
-      totalPages: Math.ceil(totalCountResult / pageLength),
+      //totalPages: Math.ceil(totalCountResult / pageLength),
     };
   },
 
