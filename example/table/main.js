@@ -23,7 +23,11 @@ function buildTable(data) {
       keys={[ 'NAME', 'OUTLET TYPE', 'STREET ADDRESS' ]}
       columns={tableColumns}
       initialData={data}
+      currentPage={0}
       initialPageLength={5}
+      isRequireSearch={true}
+      isNeedLoadPerPage={false}
+      onFocus={true}
       initialSortBy={{ prop: 'CITY', order: 'descending' }}
       pageLengthOptions={[ 5, 20, 50 ]}
     />
