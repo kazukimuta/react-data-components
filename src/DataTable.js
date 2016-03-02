@@ -17,6 +17,7 @@ var DataTable = React.createClass({
       searchField = (
               <SearchField
                id="search-field"
+               onFocus={this.props.onFocus ? true : false}
                label={this.props.searchLabel ? this.props.searchLabel : 'Search:'}
                value={this.state.filterValues.globalSearch}
                onChange={this.onFilter.bind(this, 'globalSearch')}/>);

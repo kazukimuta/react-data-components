@@ -19,7 +19,7 @@ class SearchField {
           type="search"
           value={this.props.value}
           onChange={this.onChange}
-        />
+          autoFocus={this.props.onFocus}/>
       </div>
     );
   }
