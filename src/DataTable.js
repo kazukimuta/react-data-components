@@ -53,6 +53,7 @@ var DataTable = React.createClass({
           noDataLabel={this.props.noDataLabel}
           sortBy={this.state.sortBy}
           onSort={this.onSort}
+          isNeedSortOnPage={this.props.isNeedSortOnPage}
         />
       </div>
     );

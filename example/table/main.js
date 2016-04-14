@@ -29,6 +29,7 @@ function buildTable(data) {
       isNeedLoadPerPage={false}
       onFocus={true}
       initialSortBy={{ prop: 'CITY', order: 'descending' }}
+      isNeedSortOnPage={true}
       pageLengthOptions={[ 5, 20, 50 ]}
     />
   );
