@@ -136,7 +136,8 @@ export default class Table {
 
     let getKeys = Array.isArray(keys) ? keyGetter(keys) : simpleGet(keys);
     let rows = this.props.dataArray.map(
-      row =>
+      row => {
+        return (
         <tr key={getKeys(row)} {...buildRowOptions(row)}>
           {columns.map(
             (col, i) =>
@@ -145,6 +146,7 @@ export default class Table {
               </td>
           )}
         </tr>
+        )}
     );
 
     return (

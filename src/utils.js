@@ -20,8 +20,8 @@ function some(pred, obj) {
  * @param {string} prop Property to sort.
  * @return {function(object, object)} Compare function.
  */
-var sortByFunc = 
-  (prop) => 
+var sortByFunc =
+  (prop) =>
     (a, b) => {
       if(typeof a[prop] === 'object' && typeof b[prop] === 'object' ){//React Element is rendered
         return isFinite(a[prop].props.sortBy) && isFinite(b[prop].props.sortBy) ? a[prop].props.sortBy - b[prop].props.sortBy : a[prop].props.sortBy < b[prop].props.sortBy ? -1 : a[prop].props.sortBy > b[prop].props.sortBy ? 1 : 0;

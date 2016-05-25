@@ -56,5 +56,8 @@
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react"
     ]
+  },
+  "dependencies": {
+    "lodash-compat": "^3.10.2"
   }
 }

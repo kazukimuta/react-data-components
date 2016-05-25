@@ -1,4 +1,5 @@
 var { sort, filter } = require('./utils');
+var _ = require('lodash-compat');
 
 var containsIgnoreCase = function(a, b) {
   a = (a + '').toLowerCase().trim();
@@ -10,16 +11,14 @@ function buildInitialState(props) {
   return {
     // Clone the initialData.
     data: props.initialData.slice(0),
+    baseDataWithoutSort: props.initialData.slice(0),
     sortBy: props.initialSortBy,
     filterValues: {},
     currentPage: props.currentPage,
     pageLength: props.initialPageLength,
     totalCountResult: props.totalCountResult,
     isNeedLoadPerPage: props.isNeedLoadPerPage,
-<<<<<<< HEAD
-=======
     isNeedSortOnPage: props.isNeedSortOnPage
->>>>>>> e6233d689414cf0d402534b0d7d8f9b1e0d88d35
   };
 }
 
@@ -49,21 +48,22 @@ module.exports = {
 
   componentWillMount() {
     // Do the initial sorting if specified.
-    var {sortBy, data} = this.state;
+    var {sortBy, data, baseDataWithoutSort} = this.state;
     if (sortBy) {
-      this.setState({ data: sort(sortBy, data) });
+      this.setState({ data: sort(sortBy, _.cloneDeep(baseDataWithoutSort)) });
     }
   },
 
   onSort(sortBy) {
+    var copyBaseData = _.clone(this.state.baseDataWithoutSort);
     if(this.props.isNeedSortOnPage){
         this.setState({
         sortBy: sortBy,
-        data: sort(sortBy, this.props.initialData.slice(0)),
+        data: sort(sortBy, copyBaseData),
       });
     }
     if(this.props.onSort){
-      this.props.onSort(sortBy, sort(sortBy, this.props.initialData.slice(0)));
+      this.props.onSort(sortBy, sort(sortBy, copyBaseData));
     }
   },
 
@@ -77,6 +77,7 @@ module.exports = {
 
     this.setState({
       data: newData,
+      baseDataWithoutSort: newData,
       filterValues: filterValues,
       currentPage: 0,
     });
@@ -88,6 +89,7 @@ module.exports = {
     var start = pageLength * currentPage;
     return {
       data: (isNeedLoadPerPage ? data : data.slice(start, start + pageLength)),
+      baseDataWithoutSort: (isNeedLoadPerPage ? data : data.slice(start, start + pageLength)),
       //data: data.slice(start, start + pageLength),
       //data: data,
       currentPage: currentPage,
