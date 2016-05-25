@@ -15,7 +15,7 @@ function buildInitialState(props) {
     currentPage: props.currentPage,
     pageLength: props.initialPageLength,
     totalCountResult: props.totalCountResult,
-    isNeedLoadPerPage: props.isNeedLoadPerPage
+    isNeedLoadPerPage: props.isNeedLoadPerPage,
   };
 }
 
@@ -53,10 +53,10 @@ module.exports = {
   onSort(sortBy) {
     this.setState({
       sortBy: sortBy,
-      data: sort(sortBy, this.state.data),
+      data: sort(sortBy, this.props.initialData.slice(0)),
     });
     if(this.props.onSort){
-      this.props.onSort(sortBy, sort(sortBy, this.state.data));
+      this.props.onSort(sortBy, sort(sortBy, this.props.initialData.slice(0)));
     }
   },
 
@@ -84,7 +84,7 @@ module.exports = {
       //data: data.slice(start, start + pageLength),
       //data: data,
       currentPage: currentPage,
-      totalPages: (isNeedLoadPerPage ? Math.ceil(totalCountResult / pageLength) : Math.ceil(data.length / pageLength))
+      totalPages: (isNeedLoadPerPage ? Math.ceil(totalCountResult / pageLength) : Math.ceil(data.length / pageLength)),
       //totalPages: Math.ceil(data.length / pageLength),
       //totalPages: Math.ceil(totalCountResult / pageLength),
     };
