@@ -16,6 +16,10 @@ function buildInitialState(props) {
     pageLength: props.initialPageLength,
     totalCountResult: props.totalCountResult,
     isNeedLoadPerPage: props.isNeedLoadPerPage,
+<<<<<<< HEAD
+=======
+    isNeedSortOnPage: props.isNeedSortOnPage
+>>>>>>> e6233d689414cf0d402534b0d7d8f9b1e0d88d35
   };
 }
 
@@ -30,6 +34,7 @@ module.exports = {
       initialPageLength: 10,
       pageLengthOptions: [ 5, 10, 20 ],
       isNeedLoadPerPage: true,
+      isNeedSortOnPage: true,
       filters: {
         globalSearch: {
           filter: containsIgnoreCase,
@@ -51,10 +56,12 @@ module.exports = {
   },
 
   onSort(sortBy) {
-    this.setState({
-      sortBy: sortBy,
-      data: sort(sortBy, this.props.initialData.slice(0)),
-    });
+    if(this.props.isNeedSortOnPage){
+        this.setState({
+        sortBy: sortBy,
+        data: sort(sortBy, this.props.initialData.slice(0)),
+      });
+    }
     if(this.props.onSort){
       this.props.onSort(sortBy, sort(sortBy, this.props.initialData.slice(0)));
     }
